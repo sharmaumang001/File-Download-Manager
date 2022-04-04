@@ -2,21 +2,24 @@ package services
 
 import (
 	m "dm/model"
+	"dm/utils"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/google/uuid"
 )
 
 var Direc []m.Directory
 
-func DownloadSeq(url string) *m.Err {
+func DownloadSeq(url string, ID uuid.UUID) *m.Err {
 	urlInfo := strings.Split(url, "/")
 	filename := strings.Split(urlInfo[len(urlInfo)-1], ".")
 	extension := filename[1]
 
-	if extension != "png" {
+	if !utils.IsImage(extension) {
 		return &m.Err{
 			ErrMsg:  "Not an image",
 			ErrCode: 1002,
@@ -43,16 +46,7 @@ func DownloadSeq(url string) *m.Err {
 		}
 	}
 
-	// 	filepath.Join("down", filepath.Base(d.FileName))
-	err = os.Mkdir(filename[0], 0750)
-	if err != nil {
-		return &m.Err{
-			ErrMsg:  "Unable to create file",
-			ErrCode: 1003,
-			ErrStr:  "CANNOT_CREATE_FILE",
-		}
-	}
-	file, err := os.Create(filepath.Join(filename[0], filepath.Base(filename[0]+"."+extension)))
+	file, err := os.Create(filepath.Join(ID.String(), filepath.Base(filename[0]+"."+extension)))
 
 	if err != nil {
 		return &m.Err{
