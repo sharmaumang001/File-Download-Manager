@@ -1,14 +1,14 @@
 package routes
 
 import (
-	"dm/controller"
+	"DWM/controller"
 
 	"github.com/gorilla/mux"
 )
 
-var Router = func(R *mux.Router) {
+var Router = func(r *mux.Router) {
+	r.HandleFunc("/DownloadFile", controller.DownloadFiles).Methods("POST")
+	r.HandleFunc("/FilePath/{id}", controller.FilePath).Methods("GET")
+	r.HandleFunc("/HealthCheck", controller.HealthCheck).Methods("GET")
 
-	R.HandleFunc("/download", controller.DownloadFileSeq).Methods("POST")
-	R.HandleFunc("/filepath/{id}", controller.GetFilePath).Methods("GET")
-	R.HandleFunc("/healthcheck", controller.HealthCheck).Methods("GET")
 }

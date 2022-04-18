@@ -1,11 +1,9 @@
 package model
 
-type Err struct {
-	ErrMsg  string `json:"err_msg"`
-	ErrCode int    `json:"err_code"`
-	ErrStr  string `json:"err_str"`
+type ErrorType struct {
+	ResponseMessage    string `json:"Response_message"`
+	ResponseStatusCode int    `json:"Response_code"`
 }
-
 type Directory struct {
 	FileName string `json:"filename"`
 	FilePath string `json:"filepath"`

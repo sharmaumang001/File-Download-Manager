@@ -1,7 +1,7 @@
 package main
 
 import (
-	"dm/routes"
+	"DWM/routes"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,8 +10,9 @@ import (
 )
 
 func main() {
-	r := mux.NewRouter()
-	routes.Router(r)
-	fmt.Println("Starting server on port 8000")
-	log.Fatal(http.ListenAndServe(":8000", r))
+	Router := mux.NewRouter()
+	routes.Router(Router)
+	fmt.Println("server started at port no 8000")
+	log.Fatal(http.ListenAndServe(":8000", Router))
+
 }

@@ -7,9 +7,10 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func GetFilePath(w http.ResponseWriter, r *http.Request) {
+func FilePath(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 
-	json.NewEncoder(w).Encode("/Users/aashutoshkashyap/Desktop/DownloadManager/app/" + params["id"])
+	json.NewEncoder(w).Encode("/Users/vikash/Desktop/DownloadManager/app/" + params["id"])
+
 }
